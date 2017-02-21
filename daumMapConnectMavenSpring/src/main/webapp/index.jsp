@@ -141,8 +141,8 @@ var daumMap = (function(daumMap) {
 			, type : 'POST'
 			, dataType : 'json'
 			, data : data
-			//, contentType : 'application/x-www-form-urlencoded'
 			, success : function(data) {
+				debugger;
 				if (data.channel.item.length == 0) {
 					alert('검색 결과가 존재하지 않습니다.');
 					return;
@@ -153,6 +153,7 @@ var daumMap = (function(daumMap) {
 				fn_callback(resultLatLng);
 			}
 			, error : function(xhr) {
+				debugger;
 				if(typeof fn_error == 'function') {
 					fn_error(xhr);
 				}else {

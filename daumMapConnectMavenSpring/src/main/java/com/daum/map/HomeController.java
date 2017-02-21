@@ -27,15 +27,17 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
-	public ModelAndView home(@RequestParam HashMap<String, Object> pramMap) {
+	public ModelAndView home(@RequestParam HashMap<String, Object> pramMap, @ModelAttribute ParamVo paramVo) {
 		logger.debug(pramMap.get("address").toString());
 		logger.debug(pramMap.get("param1").toString());
-		
-		ModelAndView mv = new ModelAndView();
 		
 		for (String key : pramMap.keySet()) {
             System.out.println( String.format("키 : %s, 값 : %s", key, pramMap.get(key)) );
 		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("jsonView");
+		mv.addObject("pramMap",pramMap);
 		
 		return mv;
 	}
