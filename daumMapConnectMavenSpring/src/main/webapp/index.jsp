@@ -142,11 +142,11 @@ var daumMap = (function(daumMap) {
 			, data : data
 			, success : function(data) {
 				debugger;
-				if (data.channel.item.length == 0) {
+				if (data.httpResult.channel.item.length == 0) {
 					alert('검색 결과가 존재하지 않습니다.');
 					return;
 				}
-				var item = data.channel.item[0];
+				var item = data.httpResult.channel.item[0];
 				var resultLatLng = new daum.maps.LatLng(item.lat, item.lng);
 				// 콜백함수를 실행
 				fn_callback(resultLatLng);

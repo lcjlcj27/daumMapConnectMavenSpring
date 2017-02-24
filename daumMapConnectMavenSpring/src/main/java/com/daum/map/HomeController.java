@@ -1,5 +1,7 @@
 package com.daum.map;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 
 import org.json.simple.JSONObject;
@@ -24,9 +26,10 @@ public class HomeController {
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
-	public ModelAndView home(@RequestParam HashMap<String, Object> pramMap, @ModelAttribute ParamVo paramVo) {
+	public ModelAndView home(@RequestParam HashMap<String, Object> pramMap, @ModelAttribute ParamVo paramVo) throws UnsupportedEncodingException {
 		logger.debug(pramMap.get("address1").toString());
 		logger.debug(pramMap.get("address2").toString());
 		
@@ -35,7 +38,8 @@ public class HomeController {
 		}
 		
 		String address = pramMap.get("address1").toString() + " "+ pramMap.get("address2").toString();
-		String strUrl = "https://apis.daum.net/local/geo/addr2coord?apikey=deb64cbfb0f9b09c03d272dbfed6b7b2&q="+ address +"&output=json";
+		String strUrl = "https://apis.daum.net/local/geo/addr2coord?apikey=deb64cbfb0f9b09c03d272dbfed6b7b2&q="+ URLEncoder.encode(address, "UTF-8")  +"&output=json";
+		//strUrl = "https://apis.daum.net";
 		
 		//String httpResult = HttpConnection.PostData(strUrl, strData);
 		String httpResult = HttpConnection.GetData(strUrl);
