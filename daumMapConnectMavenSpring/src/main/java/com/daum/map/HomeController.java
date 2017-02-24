@@ -1,18 +1,17 @@
 package com.daum.map;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -28,16 +27,31 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
 	public ModelAndView home(@RequestParam HashMap<String, Object> pramMap, @ModelAttribute ParamVo paramVo) {
-		logger.debug(pramMap.get("address").toString());
-		logger.debug(pramMap.get("param1").toString());
+		logger.debug(pramMap.get("address1").toString());
+		logger.debug(pramMap.get("address2").toString());
 		
 		for (String key : pramMap.keySet()) {
             System.out.println( String.format("키 : %s, 값 : %s", key, pramMap.get(key)) );
 		}
 		
+		String address = pramMap.get("address1").toString() + " "+ pramMap.get("address2").toString();
+		String strUrl = "https://apis.daum.net/local/geo/addr2coord?apikey=deb64cbfb0f9b09c03d272dbfed6b7b2&q="+ address +"&output=json";
+		
+		//String httpResult = HttpConnection.PostData(strUrl, strData);
+		String httpResult = HttpConnection.GetData(strUrl);
+		JSONObject object;
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("jsonView");
-		mv.addObject("pramMap",pramMap);
+		
+		try {
+			object = (JSONObject) JSONValue.parseWithException(httpResult);
+			System.out.println(object);
+			mv.setViewName("jsonView");
+			mv.addObject("httpResult",object);
+		} catch (ParseException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
 		
 		return mv;
 	}

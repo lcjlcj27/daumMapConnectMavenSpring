@@ -1,20 +1,20 @@
 package com.daum.map;
 
 public class ParamVo {
-	private String address = "";
-	private String param1 = "";
+	private String address1 = "";
+	private String address2 = "";
 	
-	public String getAddress() {
-		return address;
+	public String getAddress1() {
+		return address1;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddress1(String address1) {
+		this.address1 = address1;
 	}
-	public String getParam1() {
-		return param1;
+	public String getAddress2() {
+		return address2;
 	}
-	public void setParam1(String param1) {
-		this.param1 = param1;
+	public void setAddress2(String address2) {
+		this.address2 = address2;
 	}
 	
 }

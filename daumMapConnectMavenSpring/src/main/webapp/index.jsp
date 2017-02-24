@@ -29,7 +29,6 @@ $(function() {
 	$('#btnMapSearch2').click(function(e) {
 		e.preventDefault();
 		
-		debugger;
 		var address = $('#sample4_jibunAddress').val() +" "+ $('#sample4_jibunAddressDetail').val();
 		daumMap.searchLatLngJava(address, function(resultLatLng) {
 			var makerLatLng = [ {
@@ -133,8 +132,8 @@ var daumMap = (function(daumMap) {
 	/* 주소로 조회하여 좌표를 반환 java*/
 	daumMap.searchLatLngJava = function(address, fn_callback, fn_error) {
 		var data = {
-			'address' : 'address1111',
-			'param1' : 'param22222'
+			'address1' : $('#sample4_jibunAddress').val(),
+			'address2' : $('#sample4_jibunAddressDetail').val(),
 		};		
 		$.ajax({
 			  url : '/home.do'
@@ -191,8 +190,8 @@ var daumMap = (function(daumMap) {
 <body>
 <input type="text" id="sample4_postcode" placeholder="우편번호">
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" id="sample4_roadAddress" placeholder="도로명주소"><input type="text" id="sample4_roadAddressDetail" placeholder="도로명주소상세"><button id="btnMapSearch1">지도찾기(javascript)</button><br/>
-<input type="text" id="sample4_jibunAddress" placeholder="지번주소"><input type="text" id="sample4_jibunAddressDetail" placeholder="지번주소상세"><button id="btnMapSearch2">지도찾기(java)</button>
+<input type="text" id="sample4_roadAddress" name="sample4_roadAddress" placeholder="도로명주소"><input type="text" id="sample4_roadAddressDetail" name="sample4_roadAddressDetail" placeholder="도로명주소상세"><button id="btnMapSearch1">지도찾기(javascript)</button><br/>
+<input type="text" id="sample4_jibunAddress" name="sample4_jibunAddress" placeholder="지번주소"><input type="text" id="sample4_jibunAddressDetail" name="sample4_jibunAddressDetail" placeholder="지번주소상세"><button id="btnMapSearch2">지도찾기(java)</button>
 <span id="guide" style="color:#999"></span>
 
 
