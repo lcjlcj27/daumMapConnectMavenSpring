@@ -9,6 +9,7 @@ import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,12 @@ import org.springframework.web.servlet.ModelAndView;
  * Handles requests for the application home page.
  */
 @Controller
+
+
 public class HomeController {
+	
+	@Value("#{props['map.key']}")
+	private String mapKey;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -38,7 +44,7 @@ public class HomeController {
 		}
 		
 		String address = pramMap.get("address1").toString() + " "+ pramMap.get("address2").toString();
-		String strUrl = "https://apis.daum.net/local/geo/addr2coord?apikey=deb64cbfb0f9b09c03d272dbfed6b7b2&q="+ URLEncoder.encode(address, "UTF-8")  +"&output=json";
+		String strUrl = "https://apis.daum.net/local/geo/addr2coord?apikey=" + mapKey + "&q="+ URLEncoder.encode(address, "UTF-8")  +"&output=json";
 		//strUrl = "https://apis.daum.net";
 		
 		//String httpResult = HttpConnection.PostData(strUrl, strData);
