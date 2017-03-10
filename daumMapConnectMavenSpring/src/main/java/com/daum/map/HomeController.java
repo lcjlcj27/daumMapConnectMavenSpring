@@ -66,4 +66,13 @@ public class HomeController {
 		return mv;
 	}
 	
+	/*
+	 *	junit test 
+	 */
+	public int sum(int a , int b) {
+		return a + b;
+	}
+	
+
+	
 }
